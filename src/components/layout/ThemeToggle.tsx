@@ -10,9 +10,12 @@ const ThemeToggle = () => {
   const { user, updateUserPreferences } = useAuth();
 
   const handleToggle = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
     toggleTheme();
-    if (user) {
-      updateUserPreferences({ theme: theme === 'dark' ? 'light' : 'dark' });
+    
+    // If user is logged in, update their preferences
+    if (user && updateUserPreferences) {
+      updateUserPreferences({ theme: newTheme });
     }
   };
 
@@ -22,6 +25,7 @@ const ThemeToggle = () => {
       size="icon" 
       onClick={handleToggle}
       className="rounded-full w-10 h-10 hover:bg-quiz-purple/20"
+      aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
     >
       {theme === 'dark' ? (
         <Sun className="h-5 w-5 text-quiz-teal" />

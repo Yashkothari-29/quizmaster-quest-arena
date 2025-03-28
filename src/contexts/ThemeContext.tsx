@@ -15,6 +15,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const { user } = useAuth();
   const [theme, setTheme] = useState<Theme>('dark');
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     // Get theme from localStorage or use default
@@ -22,23 +23,27 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     
     if (savedTheme) {
       setTheme(savedTheme);
-    } else if (user?.preferences.theme) {
+    } else if (user?.preferences?.theme) {
       setTheme(user.preferences.theme);
     }
+    
+    setIsInitialized(true);
   }, [user]);
 
   useEffect(() => {
-    // Update document when theme changes
-    document.documentElement.classList.remove('light', 'dark');
-    document.documentElement.classList.add(theme);
-    localStorage.setItem('quizquest_theme', theme);
-  }, [theme]);
+    // Only update document when theme changes and after initialization
+    if (isInitialized) {
+      // Remove both classes first
+      document.documentElement.classList.remove('dark', 'light');
+      // Add the current theme class
+      document.documentElement.classList.add(theme);
+      // Save to localStorage
+      localStorage.setItem('quizquest_theme', theme);
+    }
+  }, [theme, isInitialized]);
 
   const toggleTheme = () => {
-    setTheme(prevTheme => {
-      const newTheme = prevTheme === 'dark' ? 'light' : 'dark';
-      return newTheme;
-    });
+    setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
   };
 
   return (
