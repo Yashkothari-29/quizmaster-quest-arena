@@ -73,15 +73,15 @@ const Header = () => {
                   </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem as={Link} to="/profile">
+                <DropdownMenuItem onClick={() => window.location.href = '/profile'}>
                   <User className="mr-2 h-4 w-4" />
                   <span>Profile</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem as={Link} to="/leaderboard">
+                <DropdownMenuItem onClick={() => window.location.href = '/leaderboard'}>
                   <Trophy className="mr-2 h-4 w-4" />
                   <span>Leaderboard</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem as={Link} to="/settings">
+                <DropdownMenuItem onClick={() => window.location.href = '/settings'}>
                   <Settings className="mr-2 h-4 w-4" />
                   <span>Settings</span>
                 </DropdownMenuItem>
@@ -106,19 +106,19 @@ const Header = () => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="cyber-box w-56 md:hidden">
-              <DropdownMenuItem as={Link} to="/">
+              <DropdownMenuItem onClick={() => window.location.href = '/'}>
                 <Home className="mr-2 h-4 w-4" />
                 <span>Home</span>
               </DropdownMenuItem>
-              <DropdownMenuItem as={Link} to="/categories">
+              <DropdownMenuItem onClick={() => window.location.href = '/categories'}>
                 <Gamepad className="mr-2 h-4 w-4" />
                 <span>Categories</span>
               </DropdownMenuItem>
-              <DropdownMenuItem as={Link} to="/battle">
+              <DropdownMenuItem onClick={() => window.location.href = '/battle'}>
                 <User className="mr-2 h-4 w-4" />
                 <span>Battle</span>
               </DropdownMenuItem>
-              <DropdownMenuItem as={Link} to="/leaderboard">
+              <DropdownMenuItem onClick={() => window.location.href = '/leaderboard'}>
                 <Trophy className="mr-2 h-4 w-4" />
                 <span>Leaderboard</span>
               </DropdownMenuItem>
